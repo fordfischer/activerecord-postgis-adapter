@@ -26,7 +26,7 @@ module ActiveRecord  # :nodoc:
           establish_master_connection unless master_established
           extra_configs = { "encoding" => encoding }
           extra_configs["owner"] = username if has_su?
-          connection.create_database(configuration_hash["database"], configuration_hash.merge(extra_configs))
+          connection.create_database(db_config.database, configuration_hash.merge(extra_configs))
           setup_gis
         rescue ::ActiveRecord::StatementInvalid => error
           if /database .* already exists/ === error.message
