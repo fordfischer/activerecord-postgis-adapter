@@ -9,9 +9,12 @@ namespace :db do
       environments.each do |environment|
         ActiveRecord::Base.configurations
           .configs_for(env_name: environment)
-          .reject { |env| env.config["database"].blank? }
-          .each do |env|
-            ActiveRecord::ConnectionAdapters::PostGIS::PostGISDatabaseTasks.new(env.config).setup_gis
+          .reject do |env|
+            db_config = ActiveRecord::Base.configurations.configs_for(env_name: env)
+            db_config.configuration_hash["database"].empty?
+          end.each do |env|
+            db_config = ActiveRecord::Base.configurations.configs_for(env_name: env)
+            ActiveRecord::ConnectionAdapters::PostGIS::PostGISDatabaseTasks.new(db_config).setup_gis
           end
       end
     end
