@@ -74,8 +74,8 @@ module ActiveRecord
         end
 
         # override
-        def create_table_definition(*args)
-          PostGIS::TableDefinition.new(self, *args)
+        def create_table_definition(*args, **options)
+          PostGIS::TableDefinition.new(self, *args, **options)
         end
 
         # memoize hash of column infos for tables

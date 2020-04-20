@@ -7,3 +7,4 @@ gem "pg", "~> 1.0", platform: :ruby
 gem "activerecord-jdbcpostgresql-adapter", platform: :jruby
 gem "ffi-geos", platform: :jruby
 gem "byebug" if ENV["BYEBUG"]
+gem 'rails', github: 'rails/rails'
