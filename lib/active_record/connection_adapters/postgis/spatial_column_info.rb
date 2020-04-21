@@ -36,7 +36,7 @@ module ActiveRecord  # :nodoc:
 
         # do not query the database for non-spatial columns/tables
         def get(column_name, type)
-          return unless PostGISAdapter.spatial_column_options(type.to_sym)
+          return unless PostGISAdapter.spatial_column_options(type)
           @spatial_column_info ||= all
           @spatial_column_info[column_name]
         end
