@@ -18,12 +18,10 @@ module ActiveRecord  # :nodoc:
 
             options[:limit] = ColumnDefinitionUtils.limit_from_options(geo_type, options)
             options[:spatial_type] = geo_type
-            column = super(name, base_type, options)
+            super
           else
-            column = super(name, type, options)
+            super
           end
-
-          column
         end
       end
 
