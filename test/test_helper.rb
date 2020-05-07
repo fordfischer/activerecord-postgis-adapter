@@ -2,7 +2,7 @@
 
 require "minitest/autorun"
 require "minitest/pride"
-require "mocha/minitest"
+require "minitest"
 require "activerecord-postgis-adapter"
 require "erb"
 require "byebug" if ENV["BYEBUG"]
