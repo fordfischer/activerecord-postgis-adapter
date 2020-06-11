@@ -57,7 +57,7 @@ module ActiveRecord  # :nodoc:
         end
 
         def username
-          @username ||= configuration_hash["username"]
+          @username ||= configuration_hash[:username]
         end
 
         def quoted_username
@@ -65,29 +65,29 @@ module ActiveRecord  # :nodoc:
         end
 
         def password
-          @password ||= configuration_hash["password"]
+          @password ||= configuration_hash[:password]
         end
 
         def su_username
-          @su_username ||= configuration_hash["su_username"] || username
+          @su_username ||= configuration_hash[:su_username] || username
         end
 
         def su_password
-          @su_password ||= configuration_hash["su_password"] || password
+          @su_password ||= configuration_hash[:su_password] || password
         end
 
         def has_su?
-          @has_su = configuration_hash.include?("su_username") unless defined?(@has_su)
+          @has_su = configuration_hash.include?(:su_username) unless defined?(@has_su)
           @has_su
         end
 
         def search_path
-          @search_path ||= configuration_hash["schema_search_path"].to_s.strip.split(",").map(&:strip)
+          @search_path ||= configuration_hash[:schema_search_path].to_s.strip.split(",").map(&:strip)
         end
 
         def extension_names
           @extension_names ||= begin
-            extensions = configuration_hash["postgis_extension"]
+            extensions = configuration_hash[:postgis_extension]
             case extensions
             when ::String
               extensions.split(",")
@@ -100,11 +100,11 @@ module ActiveRecord  # :nodoc:
         end
 
         def ensure_installation_configs
-          if configuration_hash["setup"] == "default" && !configuration_hash["postgis_extension"]
+          if configuration_hash[:setup] == "default" && !configuration_hash[:postgis_extension]
             share_dir = `pg_config --sharedir`.strip rescue "/usr/share"
             control_file = ::File.expand_path("extension/postgis.control", share_dir)
             if ::File.readable?(control_file)
-              configuration_hash["postgis_extension"] = "postgis"
+              configuration_hash[:postgis_extension] = "postgis"
             end
           end
         end
